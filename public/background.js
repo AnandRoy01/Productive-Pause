@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "startTimer") {
-    startTimer(1 * 60); // Start the timer when receiving the startTimer message
+    startTimer(25 * 60); // Start the timer when receiving the startTimer message
   }
 });
 

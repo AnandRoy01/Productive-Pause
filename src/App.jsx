@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 
 function App() {
   const startTimer = () => {
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <div className="popup">
-      <h1>Work-Break Timer</h1>
+      <h1>Productive Pause !</h1>
       <button onClick={startTimer}>Start</button>
     </div>
   );

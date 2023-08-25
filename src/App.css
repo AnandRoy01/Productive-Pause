@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.popup {
+  width: 300px;
+  background: #afcbff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+h1 {
+  color: #0e1c36;
+}
+button {
+  margin: 24px;
+  width: 130px;
+  height: 30px;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+  background-color: #f9fbf2;
+}

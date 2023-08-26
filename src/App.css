@@ -26,3 +26,9 @@ button {
   border: none;
   background-color: #f9fbf2;
 }
+
+.counter {
+  font-size: 20px;
+  margin-top: 12px;
+  font-family: monospace, "sans-serif";
+}

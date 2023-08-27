@@ -4,6 +4,8 @@ import "./App.css";
 function App() {
   const [currentTime, setCurrentTime] = useState("25:00");
   const [timerRunning, setTimerRunning] = useState(false);
+
+  const [customTime, setCustomTime] = useState();
   useEffect(() => {
     chrome.runtime.onMessage.addListener((message) => {
       if (message.action === "currentTime") {
@@ -15,7 +17,7 @@ function App() {
 
   const startTimer = () => {
     setTimerRunning(true);
-    chrome.runtime.sendMessage({ action: "startTimer" }); // Send a message to the background script
+    chrome.runtime.sendMessage({ action: "startTimer", customTime }); // Send a message to the background script
   };
 
   const stopTimer = () => {
@@ -30,7 +32,16 @@ function App() {
       {timerRunning ? (
         <button onClick={stopTimer}>Stop</button>
       ) : (
-        <button onClick={startTimer}>Start</button>
+        <>
+          <p>OR</p>
+          <input
+            onChange={(e) => {
+              setCustomTime(e.target.value);
+            }}
+            placeholder="please add custom time in minutes"
+          ></input>
+          <button onClick={startTimer}>Start</button>
+        </>
       )}
     </div>
   );

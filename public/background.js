@@ -3,7 +3,7 @@ let timerRunning = false;
 
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "startTimer") {
-    startTimer(25 * 60); // Start the timer when receiving the startTimer message
+    startTimer((message.customTime || 25) * 60); // Start the timer when receiving the startTimer message
     timerRunning = true;
   }
   if (timerRunning && message.action === "stopTimer") {

@@ -1,44 +1,341 @@
+/* Productive Pause - Modern UI
+   Design: Dark theme, clean typography, focus on timer
+*/
+
+:root {
+  --bg: #0f0f14;
+  --bg-elevated: #1a1a24;
+  --bg-card: #252532;
+  --text: #e8e8ed;
+  --text-muted: #9a9aaa;
+  --accent: #6c5ce7;
+  --accent-hover: #7d6ef7;
+  --accent-work: #00d9a5;
+  --accent-break: #74b9ff;
+  --danger: #ff6b6b;
+  --danger-hover: #ff8585;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
 .popup {
-  width: 300px;
-  background: #afcbff;
+  width: 320px;
+  min-height: 380px;
+  background: var(--bg);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 24px;
+  gap: 16px;
 }
 
-h1 {
-  color: #0e1c36;
-}
-button {
-  margin: 24px;
-  width: 130px;
-  height: 30px;
-  border-radius: 8px;
-  outline: none;
-  border: none;
-  background-color: #f9fbf2;
-}
-
-input {
-  font-size: 12px;
-  border-radius: 2px;
-  outline: none;
-  border: none;
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  height: 24px;
-  padding: 10px;
-  margin-top: 12px;
 }
+
+.header h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.icon-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+/* Phase badge */
+.phase-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.phase-work {
+  background: rgba(0, 217, 165, 0.2);
+  color: var(--accent-work);
+}
+
+.phase-break {
+  background: rgba(116, 185, 255, 0.2);
+  color: var(--accent-break);
+}
+
+/* Timer */
+.timer-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  stroke: var(--bg-card);
+}
+
+.progress-ring-fill {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.phase-work ~ .timer-container .progress-ring-fill {
+  stroke: var(--accent-work);
+}
+
+.phase-break ~ .timer-container .progress-ring-fill {
+  stroke: var(--accent-break);
+}
+
+/* Fix phase sibling selector - use parent with data attribute instead */
+.popup:has(.phase-work) .progress-ring-fill {
+  stroke: var(--accent-work);
+}
+
+.popup:has(.phase-break) .progress-ring-fill {
+  stroke: var(--accent-break);
+}
+
+/* Counter text */
 .counter {
-  font-size: 20px;
-  margin-top: 12px;
-  font-family: monospace, "sans-serif";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.timer-container {
+  min-height: 160px;
+}
+
+.timer-container .counter {
+  position: absolute;
+  margin-top: 0;
+}
+
+/* Stats */
+.stats {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.stats strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-elevated);
+}
+
+.btn-danger {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--danger);
+}
+
+.btn-danger:hover {
+  background: rgba(255, 107, 107, 0.3);
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Start section */
+.start-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.start-section input[type="number"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--bg-card);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.start-section input[type="number"]:focus {
+  border-color: var(--accent);
+}
+
+.start-section input::placeholder {
+  color: var(--text-muted);
+}
+
+.error {
+  font-size: 0.8rem;
+  color: var(--danger);
+}
+
+/* Settings */
+.settings-panel {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.settings-row label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.settings-row input[type="number"] {
+  width: 70px;
+  padding: 8px 10px;
+  border: 1px solid var(--bg-elevated);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.settings-row.checkbox-row {
+  justify-content: flex-start;
+}
+
+.settings-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.settings-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.settings-buttons .btn {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* Loader */
+.loader {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--bg-card);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader + p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 8px;
 }
